@@ -5,13 +5,21 @@ metadata:
   namespace: argocd
 spec:
   project: "default"
-  source:
-  - repoURL: "https://grafana.github.io/helm-charts"3
+  sources:
+  - repoURL: "https://grafana.github.io/helm-charts"
     chart: grafana
     targetRevision: 7.0.19
     helm:
-      valuesFiles:
+      valueFiles:
       - $values/grafana/values.yaml
-  - repoURL: 'https://github.com/edsonoliveirarodz/descomplicando-gitops.git'
+  - repoURL: "https://github.com/edsonoliveirarodz/descomplicando-gitops.git"
     targetRevision: feat/day2
     ref: values
+  destination:
+    namespace: monitoring
+    server: "https://kubernetes.default.svc"
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
