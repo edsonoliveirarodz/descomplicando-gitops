@@ -1,0 +1,7 @@
+argocd:
+  prometheus:
+    enabled: false
+    ingress: "https://prometheus.my-domain.com"
+  grafana:
+    enabled: false
+    ingress: "https://grafana.my-domain.com"
