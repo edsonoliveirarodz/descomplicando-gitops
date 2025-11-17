@@ -7,6 +7,7 @@ spec:
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
+  project: default
   source:
     path: app-of-apps-monitoring
     helm:
@@ -14,11 +15,11 @@ spec:
       - name: "argocd.prometheus.enabled"
         value: "true"
       - name: "argocd.prometheus.ingress"
-        value: "prometheus.my-domain.com"
+        value: "prometheus.company123.com"
       - name: "argocd.grafana.enabled"
         value: "true"
       - name: "argocd.grafana.ingress"
-        value: "grafana.my-domain.com"
+        value: "grafana.company123.com"
     repoURL: https://github.com/edsonoliveirarodz/descomplicando-gitops.git
     targetRevision: feat/day2
   syncPolicy:
