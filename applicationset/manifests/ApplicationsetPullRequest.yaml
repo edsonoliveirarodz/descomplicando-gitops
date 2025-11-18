@@ -20,7 +20,7 @@ spec:
       project: "default"
       source:
         repoURL: https://github.com/edsonoliveirarodz/descomplicando-gitops.git
-        targetRevision: '{{target_branch}}'
+        targetRevision: '{{head_sha}}'
         path: app-of-apps/
         helm:
           parameters:
