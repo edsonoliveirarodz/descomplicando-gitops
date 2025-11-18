@@ -20,8 +20,14 @@ spec:
       project: "default"
       source:
         repoURL: https://github.com/edsonoliveirarodz/descomplicando-gitops.git
-        targetRevision: '{{head_sha}}'
+        targetRevision: '{{target_branch}}'
         path: app-of-apps/
+        helm:
+          parameters:
+          - name: "argocd.giropopsSenhas.enabled"
+            value: "true"
+          - name: "argocd.randomLogger.enabled"
+            value: "true"
       destination:
         server: https://kubernetes.default.svc
         namespace: 'app-of-apps-{{branch_slug}}-{{number}}'
