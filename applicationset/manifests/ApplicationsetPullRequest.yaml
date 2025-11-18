@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-addons
+  namespace: argocd
+spec:
+  generators:
+  - pullRequest:
+      github: 
+        owner: edsonoliveirarodz
+        repo: descomplicando-gitops
+        tokenRef:
+          secretName: github-token
+          key: token
+      requeueAfterSeconds: 60
+  template:
+    metadata:
+      name: "stack-apps-{{branch_slug}}-{{number}}"
+    spec:
+      project: "default"
+      source:
+        repoURL: https://github.com/edsonoliveirarodz/descomplicando-gitops.git
+        targetRevision: '{{target_branch}}'
+        path: app-of-apps/
+        helm:
+          parameters:
+          - name: "argocd.giropopsSenhas.enabled"
+            value: "true"
+          - name: "argocd.randomLogger.enabled"
+            value: "true"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'app-of-apps-{{branch_slug}}-{{number}}'
+      syncPolicy:
+        automated: {}
+        syncOptions:
+        - CreateNamespace=true
