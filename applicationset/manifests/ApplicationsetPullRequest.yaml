@@ -15,7 +15,7 @@ spec:
       requeueAfterSeconds: 60
   template:
     metadata:
-      name: stack-apps-{{branch_slug}}-{{number}}
+      name: "stack-apps-{{branch_slug}}-{{number}}"
     spec:
       project: "default"
       source:
